@@ -26,17 +26,7 @@ var dishSchema = new Schema({
 });
 
 
-var userSchema = new Schema({
-    username: String,
-    password: String,
-    permissionProfile: String,
-    fullName: String,
-    email: String,
-    birthDate: Date,
-    cellphoneNumber: String
-});
+var Dishes = mongoose.model('Dish', dishSchema);
 
-
-var Dishs = mongoose.model('Dish', dishSchema);
 console.log("se creo modelo");
-module.exports = Tickets;
+module.exports = Dishes;

@@ -26,7 +26,7 @@ mongoose.connect(urlBD,opts).then
 );
 
 // Import router
-var apiRoutes = require("./api-routes")
+var apiRoutes = require("./api-endpoints")
 
 
 // Todo lo que recibe la app se tratara como json
@@ -41,13 +41,13 @@ app.use(cors());
 var port = process.env.PORT || 8080;
 
 // Send message for default URL
-app.get('/', (req, res) => res.send('Hello World with Express in Aplicaciones Interactivas'));
+app.get('/', (req, res) => res.send('Hello World'));
 
 // Use Api routes in the App
-app.use('/apiAgenda', apiRoutes);
+app.use('/apiGulappX', apiRoutes);
 
 // Launch app to listen to specified port
 app.listen(port, function () {
-     console.log("Running RestHub on port " + port);
+     console.log("Running on port " + port);
 });
 
