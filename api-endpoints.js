@@ -2,7 +2,7 @@
 let router = require('express').Router();
 let apiController = require('./controllers/apiControllers');
        
-    
+
 
 // Set default API response
 router.get('/', function (req, res) 
@@ -15,28 +15,58 @@ router.get('/', function (req, res)
 });
 
 //EndPoint para leer toda la base
-router.get('/leerAgenda',function(req,res)
+router.get('/getDishes',function(req,res)
 {
     console.log("leer");
-    apiController.getContactos(req,res);
+    apiController.getDishes(req,res);
 });
-//EndPoint para leer con filtro
-router.post('/leerAgenda/?idBusqueda',function(req,res)
+
+
+router.get('/getDishesbyName',function(req,res)
 {
-    console.log("leer con filtro");
-    apiController.getContactosById(req,res);
+    console.log("leer");
+    apiController.getDishesbyName(req,res);
+});
+
+router.get('/getDishesAutoComplete',function(req,res)
+{
+    console.log("autocomplete");
+    apiController.getDishesAutocomplete(req,res);
+});
+
+//EndPoint para leer con filtro
+router.post('/getDistances',function(req,res)
+{
+    console.log("calcular distancias entre 2 direcciones");
+    apiController.getDistanceBetweenAddresses(req,res);
 });
 //EndPoint para insertar en la BD
-router.post('/insertContacto/Contacto',function(req,res)
+router.post('/insertDish',function(req,res)
 {
     console.log(req.body);
-    apiController.insertContacto(req,res);
+    apiController.insertDish(req,res);
 });
 
 //EndPoint para modificar en la BD
-router.post('/updateContacto/Contacto',function(req,res)
+router.post('/insertComment',function(req,res)
 {
-    apiController.updateContacto(req,res);
+    apiController.insertComment(req,res);
+});
+
+router.get('/getComments',function(req,res)
+{
+    apiController.getComments(req,res);
+});
+
+router.get('/getCommentsbyId',function(req,res)
+{
+    apiController.getCommentsbyId(req,res);
+});
+
+//EndPoint para modificar en la BD
+router.post('/updateRestaurant',function(req,res)
+{
+    apiController.updateRestaurant(req,res);
 });
 
 //EndPoint para eliminar en la BD
