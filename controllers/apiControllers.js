@@ -69,7 +69,7 @@ let getDishesbyName = (req, res) =>
 
 let getDishesAutocomplete = (req, res) =>
 {      
-    console.log("lectura de platos por nombre");
+    console.log("autocomplete");
     //Obtener id busqueda
     let name = {dishName: { $regex: '.*' + req.body.dishName + '.*', $options: 'i' } };
     console.log("ahora viene la variable");
