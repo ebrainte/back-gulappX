@@ -22,13 +22,13 @@ router.get('/getDishes',function(req,res)
 });
 
 
-router.get('/getDishesbyName',function(req,res)
+router.post('/getDishesbyName',function(req,res)
 {
     console.log("leer");
     apiController.getDishesbyName(req,res);
 });
 
-router.get('/getDishesAutoComplete',function(req,res)
+router.post('/getDishesAutoComplete',function(req,res)
 {
     console.log("autocomplete");
     apiController.getDishesAutocomplete(req,res);
@@ -58,7 +58,7 @@ router.get('/getComments',function(req,res)
     apiController.getComments(req,res);
 });
 
-router.get('/getCommentsbyId',function(req,res)
+router.post('/getCommentsbyId',function(req,res)
 {
     apiController.getCommentsbyId(req,res);
 });
