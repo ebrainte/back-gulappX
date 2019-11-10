@@ -22,10 +22,10 @@ router.get('/getDishes',function(req,res)
 });
 
 
-router.post('/getDishesbyName',function(req,res)
+router.post('/getDishesbyName',async function(req,res)
 {
     console.log("leer");
-    apiController.getDishesbyName(req,res);
+    await apiController.getDishesbyName(req,res);
 });
 
 router.post('/getDishesAutoComplete',function(req,res)

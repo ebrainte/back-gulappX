@@ -25,8 +25,10 @@ let getDishes = (req, res) =>
 };
 
 
-let getDishesbyName = (req, res) =>
+const getDishesbyName = async (req, res) =>
 {      
+    disharray = [];
+    distance = String;
     console.log("lectura de platos por nombre");
     //Obtener id busqueda
     let name = {dishName: { $regex: '.*' + req.body.dishName + '.*', $options: 'i' } };
@@ -37,31 +39,32 @@ let getDishesbyName = (req, res) =>
     Dishes.find(name, (err, text) =>{
         if (err){
             console.log(err);
+            
             return res.status(500).send(text);
         }
         else{
-            console.log(text);
-            return res.status(200).send(text);
+            //console.log(text);
+            console.log(req.body.address);
+            if (req.body.address) {
+                console.log("entro una direccion");
+                console.log(req.body.address);
+                    getDistance(req.body.address, text).then(function(data){ //element.restaurantAddress, text).then(function(data){
+                        //console.log("ACA VIENE LA MAGIA" +  data);
+                           return (data);
+                        }).then(function(content){
+                            console.log("ACA VIENE EL CONTENT:" + content);
+                            return res.status(200).send(content);
+
+                     })
+                   
+            }else
+            {
+                return res.status(200).send(text);
+            }
+            
+            
         }
     })
-    //     // (text)=>
-    //     // {
-    //     //     console.log(dishList);
-    //     //     res.status(200).send(dishList); //devuelvo resultado query   
-    //     //     //console.log(listaContactos);    
-    //     // },
-    //     // (err)=>
-    //     // {
-    //     //     res.status(500).send(err);
-    //     //     console.log(err);
-    //     // }
-    // })
-    // Dishes.find(name, (err, people) =>{
-    //     if (err) return res.status(500).send(err)
-    //     // send the list of all people in database with name of "John James" and age of 36
-    //     // Very possible this will be an array with just one Person object in it.
-    //     return res.status(200).send(people);
-    // })
 
       
 };
@@ -107,6 +110,39 @@ let getDishesAutocomplete = (req, res) =>
 
       
 };
+
+
+
+    async function getDistance(firstAddr,text ) {
+
+
+        
+            
+            let promiseArray = text.map((value) => {
+                // console.log(value);
+                return rp({
+                    uri: "https://maps.googleapis.com/maps/api/directions/json?origin=" + firstAddr + "&destination=" + value.restaurantAddress + "&key=AIzaSyBHfXPuQY3IGXBEFXzZ3Oo3HDqilYNVFv4",
+                    json: true
+                  })
+                    .then(function (data)  {
+                      var obj = data.routes[0].legs[0].distance.text;
+                      console.log(obj);
+                      asd = value;
+                      asd.distance = obj;
+                      console.log("PUTODEMIERDA" + asd);
+                      return (asd);
+                    })
+    
+            });
+            // console.log(promiseArray);
+            // resolve(promiseArray);
+
+        return Promise.all(promiseArray);
+
+        
+      }
+      
+
 
 let getDistanceBetweenAddresses = (req, res) =>
 {      
