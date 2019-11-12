@@ -338,7 +338,7 @@ let insertComment = (req, res) => {
     console.log(req.body);
 
     var newComment = Comments({
-        restaurantId: req.body.restaurantId,
+        dishId: req.body.dishId,
         fullName: req.body.fullName,
         stars: req.body.stars,
         title: req.body.title,
@@ -377,8 +377,8 @@ let getComments = (req, res) => {
 let getCommentsbyId = (req, res) => {
     console.log("llegue a leer con filtro");
     //Obtener id busqueda
-    let dishId = { _id: req.body.dishId };
-    console.log(idRestaurant);
+    let dishId = { dishId: req.body.dishId };
+    console.log(dishId);
     //Listar resultados
     Comments.find(dishId, (err, text) => {
         if (err) {

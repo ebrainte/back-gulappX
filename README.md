@@ -54,23 +54,6 @@ Body:
 ```
 
 
-### Insert a new comment
-
-POST
-```
-/apiGulappX/insertComment
-
-Body:
-{
-	"restaurantId": "5db4a75662d70c0ddcb72e0f",
-	"fullName": "Mauricio Macri",
-	"stars": 5,
-	"title": "Excelentes",
-	"body": "Divinas!!!!"
-}
-```
-
-
 ### Get all dishes
 
 GET
@@ -184,4 +167,20 @@ Body:
 { 
 	"dishId" : "5db4a7dd62d70c0ddcb72e10"
 }
+```
 
+### Insert a new comment
+
+POST
+```
+/apiGulappX/insertComment
+
+Body:
+{
+	"dishId": "5db4a75662d70c0ddcb72e0f",
+	"fullName": "Mauricio Macri",
+	"stars": 5,
+	"title": "Excelentes",
+	"body": "Divinas!!!!"
+}
+```

@@ -4,7 +4,7 @@ var Schema = mongoose.Schema;
 
 
 var commentsSchema = new Schema({
-    restaurantId: String,
+    dishId: String,
     fullName: String,
     stars: Number,
     date: Date,
