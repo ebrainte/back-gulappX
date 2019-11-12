@@ -28,6 +28,14 @@ router.post('/getDishesbyName',async function(req,res)
     await apiController.getDishesbyName(req,res);
 });
 
+
+router.post('/getDishesbyId',async function(req,res)
+{
+    console.log("leer");
+    await apiController.getDishesbyId(req,res);
+});
+
+
 router.post('/getDishesAutoComplete',function(req,res)
 {
     console.log("autocomplete");

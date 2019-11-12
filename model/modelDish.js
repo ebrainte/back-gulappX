@@ -6,6 +6,7 @@ var Schema = mongoose.Schema;
 var dishSchema = new Schema({
     dishName: String,
     restaurantName: String,
+    branchName: String,
     restaurantAddress: String,
     dishDescription: String,
     dishDetailedDesc: String,

@@ -78,13 +78,50 @@ GET
 ```
 
 ### Get dishes by name (not necessarily the full name)
-GET
+POST
 ```
 /apiGulappX/getDishesbyName
 
 Body:
 {
 	"dishName" : "milanesa"
+}
+```
+
+### Get dishes by name AND Location (not necessarily the full name), returns the dish with the distance from the location pushed
+POST
+```
+/apiGulappX/getDishesbyName
+
+Body:
+{
+	"dishName" : "milanesa",
+	"address" : "Avenida Rivadavia 7800, Buenos Aires, Argentina"
+}
+```
+
+
+### Get dishes by ID (not necessarily the full name)
+POST
+```
+/apiGulappX/getDishesbyId
+
+Body:
+{
+	"dishId" : "5db4a75662d70c0ddcb72e0f"
+}
+```
+
+
+### Get dishes by ID AND Location (not necessarily the full name), returns the dish with the distance from the location pushed
+POST
+```
+/apiGulappX/getDishesbyId
+
+Body:
+{
+	"dishId" : "5db4a75662d70c0ddcb72e0f",
+	"address" : "Avenida Rivadavia 7800, Buenos Aires, Argentina"
 }
 ```
 
