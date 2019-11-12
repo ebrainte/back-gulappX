@@ -377,10 +377,10 @@ let getComments = (req, res) => {
 let getCommentsbyId = (req, res) => {
     console.log("llegue a leer con filtro");
     //Obtener id busqueda
-    let dishId = { dishId: req.body.dishId };
-    console.log(dishId);
+    let id = { dishId: req.body.dishId };
+    console.log(id);
     //Listar resultados
-    Comments.find(dishId, (err, text) => {
+    Comments.find(id, (err, text) => {
         if (err) {
             console.log(err);
             return res.status(500).send(text);
