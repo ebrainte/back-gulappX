@@ -26,14 +26,15 @@ POST
 
 Body:
 {
-	"dishName": "Milanesas con Pure",
-	"restaurantName": "La Armada",
-	"restaurantAddress": "Moreno 650, Buenos Aires, Argentina",
-	"dishDescription": "Exquisita Milanesa con Pure",
-	"dishDetailedDesc": "La milanesa es un filete fino, normalmente de carne vacuna, pasado por huevo batido y luego por pan rallado, que se cocina frito o (menos comúnmente) al horno. Por extensión, se llama milanesa a cualquier rebanada de un ingrediente rebozado y frito: hay así milanesas de pollo, de pescado, de soja, de berenjena o de mozzarella, entre otros ingredientes. No se conoce el origen de esta receta, aunque hay muchos mitos al respecto. Su nombre español proviene de la ciudad italiana de Milán. Desde fines del siglo xix es una comida típica de la cocina argentina, boliviana, chilena, paraguaya, mexicana y uruguaya.",
-	"imageUrl": "https://i.pinimg.com/originals/18/eb/6d/18eb6d8fe68f9f24dabb6f800b3c891e.jpg",
-	"starAverage": "4.5",
-	"comments": []
+	"dishName": "Milanesa con Papas Fritas",
+	"restaurantName": "El Palacio de la Papa Frita",
+	"branchName": "Corrientes",
+	"restaurantAddress": "Av. Corrientes 1612, Buenos Aires, Argentina",
+	"dishDescription": "Milanesa de 27cm acompanada con papas",
+	"dishDetailedDesc": "La milanesa es uno de los platos más populares en los que la guarnición son las patatas fritas, la comida que más gusta al ser humano de acuerdo con un estudio científico llevado a cabo por la revista científica Scientific Reports. La milanesa es un filete fino rebozado a base de huevo batido y pan rallado. Como se ve en la foto, suele acompañarse de unas rodajas de limón para servirse.",
+	"imageUrl": "https://www.viajejet.com/wp-content/viajes/Plato-de-milanesa-con-papas-ti%CC%81pico-de-Argentina.jpg",
+	"pricing": "285"
+
 }
 
 ```
@@ -136,6 +137,37 @@ Body:
 }
 ```
 
+### Get Restaurant Menu
+POST
+```
+/apiGulappX/getRestaurantMenu
+
+Body:
+{
+	"restaurantName" : "La Armada",
+	"branchName" : "Sucursal Almagro"
+}
+```
+
+### Update Dish
+
+## Note: You can choose what fields to update, the only required fields are restaurantName and branchName
+POST
+```
+/apiGulappX/updateDish
+
+Body:
+{
+	"dishId" : "5dca25784cb66e0465cc96d2",
+	"dishName" : "Milanesa con Papas Fritas", 
+	"dishDescription" : "Milanesa de 27cm acompanada con papas",
+	"dishDetailedDesc" : "La milanesa es uno de los platos más populares en los que la guarnición son las patatas fritas, la comida que más gusta al ser humano de acuerdo con un estudio científico llevado a cabo por la revista científica Scientific Reports. La milanesa es un filete fino rebozado a base de huevo batido y pan rallado. Como se ve en la foto, suele acompañarse de unas rodajas de limón para servirse.",
+	"imageUrl" : "https://www.viajejet.com/wp-content/viajes/Plato-de-milanesa-con-papas-ti%CC%81pico-de-Argentina.jpg",
+	"pricing" : 290
+}
+```
+
+
 ### Get all comments
 
 GET
@@ -150,6 +182,6 @@ GET
 
 Body:
 { 
-	"idRestaurant" : "5db4a7dd62d70c0ddcb72e10"
+	"dishId" : "5db4a7dd62d70c0ddcb72e10"
 }
 

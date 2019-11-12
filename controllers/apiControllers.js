@@ -248,12 +248,12 @@ let insertDish = (req, res) => {
     var newDish = Dishes({
         dishName: req.body.dishName,
         restaurantName: req.body.restaurantName,
+        branchName: req.body.branchName,
         restaurantAddress: req.body.restaurantAddress,
         dishDescription: req.body.dishDescription,
         dishDetailedDesc: req.body.dishDetailedDesc,
         imageUrl: req.body.imageUrl,
-        starAverage: req.body.starAverage,
-        comments: req.body.comments,
+        pricing: req.body.pricing,
     });
     newDish.save().
         then
@@ -267,6 +267,73 @@ let insertDish = (req, res) => {
             }
         )
 }
+
+
+
+let updateDish = (req, res) => {
+    let id = { 
+        _id: req.body.dishId
+     };
+
+    console.log(id);
+    const updateQuery = {};
+
+    if (req.body.dishName) {
+        updateQuery.dishName = req.body.dishName;
+    }
+    if (req.body.dishDescription) {
+        updateQuery.dishDescription = req.body.dishDescription;
+    }
+    if (req.body.dishDetailedDesc) {
+        updateQuery.dishDetailedDesc = req.body.dishDetailedDesc;
+    }
+    if (req.body.imageUrl) {
+        updateQuery.imageUrl = req.body.imageUrl;
+    }
+    if (req.body.pricing) {
+        updateQuery.pricing = req.body.pricing;
+    }
+
+
+    console.log("update: " + id);
+    console.log(updateQuery);
+    // console.log(newContacto);
+    Dishes.findOneAndUpdate(id, updateQuery, { new: true }, function (err) {
+        res.status(200).send({ estado: "Plato modificado con exito" }); //devuelvo resultado query       
+        (err) => {
+            res.status(500).send(err);
+            console.log(err);
+        }
+
+    });
+}
+
+
+const getRestaurantMenu = async (req, res) => {
+
+    let id = { 
+        restaurantName: req.body.restaurantName,
+        branchName: req.body.branchName
+     };
+
+    Dishes.find(id, (err, text) => {
+        if (err) {
+            console.log(err);
+
+            return res.status(500).send(text);
+        }
+        else {           
+            return res.status(200).send(text);
+        }
+    })
+
+
+};
+
+
+
+
+//COMMENTS 
 let insertComment = (req, res) => {
     console.log(req.body);
 
@@ -310,10 +377,10 @@ let getComments = (req, res) => {
 let getCommentsbyId = (req, res) => {
     console.log("llegue a leer con filtro");
     //Obtener id busqueda
-    let idRestaurant = { restaurantId: req.body.idRestaurant };
+    let dishId = { _id: req.body.dishId };
     console.log(idRestaurant);
     //Listar resultados
-    Comments.find(idRestaurant, (err, text) => {
+    Comments.find(dishId, (err, text) => {
         if (err) {
             console.log(err);
             return res.status(500).send(text);
@@ -328,22 +395,10 @@ let getCommentsbyId = (req, res) => {
 
 
 
-let updateRestaurant = (req, res) => {
-    let id = { id: req.body.id };
 
-    console.log("update", id);
-    // console.log(newContacto);
-    Dishes.findOneAndUpdate({ _id: req.body.id }, { $set: { restaurantName: req.body.restaurantName } }, { new: true }, function (err) {
-        //console.log("respuesta",res);
-        //let rta = {estado: "Ok"};
-        res.status(200).send({ estado: "Registro modificado" }); //devuelvo resultado query       
-        (err) => {
-            res.status(500).send(err);
-            console.log(err);
-        }
 
-    });
-}
+
+
 
 let deleteContacto = (req, res) => {
     let id = { dni: req.body.dniEliminado };
@@ -357,5 +412,5 @@ let deleteContacto = (req, res) => {
 
 
 }
-module.exports = { getDishes, getDishesbyName,getDishesbyId, getDishesAutocomplete, insertDish, insertComment, getComments, getCommentsbyId, updateRestaurant, deleteContacto, getDistanceBetweenAddresses };
+module.exports = { getDishes, getDishesbyName, getDishesbyId, getDishesAutocomplete, insertDish, insertComment, getComments, getCommentsbyId, getRestaurantMenu, updateDish, deleteContacto, getDistanceBetweenAddresses };
 

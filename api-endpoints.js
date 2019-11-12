@@ -72,9 +72,15 @@ router.post('/getCommentsbyId',function(req,res)
 });
 
 //EndPoint para modificar en la BD
-router.post('/updateRestaurant',function(req,res)
+router.post('/updateDish',function(req,res)
 {
-    apiController.updateRestaurant(req,res);
+    apiController.updateDish(req,res);
+});
+
+
+router.post('/getRestaurantMenu',function(req,res)
+{
+    apiController.getRestaurantMenu(req,res);
 });
 
 //EndPoint para eliminar en la BD
