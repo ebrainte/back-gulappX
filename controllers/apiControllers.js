@@ -271,9 +271,9 @@ let insertDish = (req, res) => {
 
 
 let updateDish = (req, res) => {
-    let id = { 
+    let id = {
         _id: req.body.dishId
-     };
+    };
 
     console.log(id);
     const updateQuery = {};
@@ -311,10 +311,10 @@ let updateDish = (req, res) => {
 
 const getRestaurantMenu = async (req, res) => {
 
-    let id = { 
+    let id = {
         restaurantName: req.body.restaurantName,
         branchName: req.body.branchName
-     };
+    };
 
     Dishes.find(id, (err, text) => {
         if (err) {
@@ -322,7 +322,7 @@ const getRestaurantMenu = async (req, res) => {
 
             return res.status(500).send(text);
         }
-        else {           
+        else {
             return res.status(200).send(text);
         }
     })
@@ -340,7 +340,11 @@ let insertComment = (req, res) => {
     var newComment = Comments({
         dishId: req.body.dishId,
         fullName: req.body.fullName,
-        stars: req.body.stars,
+        priceStar: req.body.priceStar,
+        locationStar: req.body.locationStar,
+        sizeStar: req.body.sizeStar,
+        attentionStar: req.body.attentionStar,
+        presentationStar: req.body.presentationStar,
         title: req.body.title,
         body: req.body.body
     });
@@ -373,6 +377,55 @@ let getComments = (req, res) => {
 
 };
 
+
+let getDishAveragebyId = (req, res) => {
+
+    let result = {};
+    let id = { dishId: req.body.dishId };
+    console.log(id);
+    Comments.find(id, (err, text) => {
+        if (err) {
+            console.log(err);
+            return res.status(500).send(text);
+        }
+        else {
+            var qty = 0;
+            var sumPrice = 0;
+            var sumLocation = 0;
+            var sumSize = 0;
+            var sumAttention = 0;
+            var sumPresentation = 0;
+            text.forEach(function (table) {
+                
+                if (table.priceStar != null) {
+                    qty += 1;
+                    sumPrice += table.priceStar;
+                    sumLocation += table.locationStar;
+                    sumSize += table.sizeStar;
+                    sumAttention += table.attentionStar;
+                    sumPresentation += table.presentationStar;
+                    // console.log("Item numero: " + qty + " Star Precio: " + sumPrice);
+                }
+            });
+
+            var avgPrice = sumPrice / qty;
+            var avgLocation = sumLocation / qty;
+            var avgSize = sumSize / qty;
+            var avgAttention = sumAttention / qty;
+            var avgPresentation = sumPresentation / qty;
+            var avgTotal = (avgPrice + avgLocation + avgSize + avgAttention + avgPresentation) / 5;
+            result.avgPrice = avgPrice;
+            result.avgLocation = avgLocation;
+            result.avgSize = avgSize;
+            result.avgAttention = avgAttention;
+            result.avgPresentation = avgPresentation;
+            result.avgTotal = avgTotal;
+            return res.status(200).send(result);
+        }
+    });
+
+
+}
 
 let getCommentsbyId = (req, res) => {
     console.log("llegue a leer con filtro");
@@ -412,5 +465,5 @@ let deleteContacto = (req, res) => {
 
 
 }
-module.exports = { getDishes, getDishesbyName, getDishesbyId, getDishesAutocomplete, insertDish, insertComment, getComments, getCommentsbyId, getRestaurantMenu, updateDish, deleteContacto, getDistanceBetweenAddresses };
+module.exports = { getDishes, getDishesbyName, getDishesbyId, getDishesAutocomplete, insertDish, insertComment, getComments, getCommentsbyId, getDishAveragebyId, getRestaurantMenu, updateDish, deleteContacto, getDistanceBetweenAddresses };
 

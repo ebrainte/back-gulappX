@@ -71,6 +71,12 @@ router.post('/getCommentsbyId',function(req,res)
     apiController.getCommentsbyId(req,res);
 });
 
+
+router.post('/getDishAveragebyId',function(req,res)
+{
+    apiController.getDishAveragebyId(req,res);
+});
+
 //EndPoint para modificar en la BD
 router.post('/updateDish',function(req,res)
 {

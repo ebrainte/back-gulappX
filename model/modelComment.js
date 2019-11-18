@@ -6,7 +6,11 @@ var Schema = mongoose.Schema;
 var commentsSchema = new Schema({
     dishId: String,
     fullName: String,
-    stars: Number,
+    priceStar: Number,
+    locationStar: Number,
+    sizeStar: Number,
+    attentionStar: Number,
+    presentationStar: Number,
     date: Date,
     title: String,
     body: String

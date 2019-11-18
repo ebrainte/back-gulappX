@@ -179,8 +179,25 @@ Body:
 {
 	"dishId": "5db4a75662d70c0ddcb72e0f",
 	"fullName": "Mauricio Macri",
-	"stars": 5,
+	"priceStar": 4,
+    "locationStar": 3,
+    "sizeStar": 5,
+    "attentionStar": 4,
+    "presentationStar": 2,
 	"title": "Excelentes",
 	"body": "Divinas!!!!"
+}
+```
+
+
+### Get Averages of a dish (by dish Id)
+
+POST
+```
+/apiGulappX/getDishAveragebyId
+
+Body:
+{ 
+	"dishId" : "test1"
 }
 ```
