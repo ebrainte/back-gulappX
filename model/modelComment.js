@@ -11,6 +11,7 @@ var commentsSchema = new Schema({
     sizeStar: Number,
     attentionStar: Number,
     presentationStar: Number,
+    avgStar: Number,
     date: Date,
     title: String,
     body: String

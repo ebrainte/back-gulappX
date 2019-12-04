@@ -13,7 +13,8 @@ var dishSchema = new Schema({
     imageUrl: String,
     distance: String,
     starAverage: Number,
-    pricing: Number
+    pricing: Number,
+    geo: []
 });
 var Dishes = mongoose.model('Dish', dishSchema);
 

@@ -134,7 +134,7 @@ Body:
 
 ### Update Dish
 
-## Note: You can choose what fields to update, the only required fields are restaurantName and branchName
+## Note: You can choose what fields to update, the only required field is dishId
 POST
 ```
 /apiGulappX/updateDish
@@ -184,6 +184,7 @@ Body:
     "sizeStar": 5,
     "attentionStar": 4,
     "presentationStar": 2,
+	"avgStar": 2.4,
 	"title": "Excelentes",
 	"body": "Divinas!!!!"
 }

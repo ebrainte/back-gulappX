@@ -1,8 +1,21 @@
 var Dishes = require('../model/modelDish');
 var Comments = require('../model/modelComment');
 var bodyParser = require('body-parser');
-var request = require("request")
-const rp = require('request-promise')
+var request = require("request");
+var NodeGeocoder = require('node-geocoder');
+const rp = require('request-promise');
+
+
+var options = {
+    provider: 'google',
+
+    // Optional depending on the providers
+    httpAdapter: 'https', // Default
+    apiKey: 'AIzaSyBHfXPuQY3IGXBEFXzZ3Oo3HDqilYNVFv4', // for Mapquest, OpenCage, Google Premier
+    formatter: null         // 'gpx', 'string', ...
+};
+
+var geocoder = NodeGeocoder(options);
 
 
 let getDishes = (req, res) => {
@@ -95,7 +108,11 @@ const getDishesbyId = async (req, res) => {
                     return (data);
                 }).then(function (content) {
                     console.log("ACA VIENE EL CONTENT:" + content);
-                    return res.status(200).send(content);
+                    geocode(content).then(function (data) {
+                        console.log("ACA ADADSFDSFVIENE LA MAGIA" + data);
+                        res.status(200).send(data);
+                    })
+                    //return res.status(200).send(content);
 
                 })
 
@@ -110,6 +127,24 @@ const getDishesbyId = async (req, res) => {
 
 };
 
+
+async function geocode(text) {
+
+    // console.log(text[0].eventAddress);
+    return geocoder.geocode(text[0].restaurantAddress)
+        .then(function (res) {
+            console.log("ADENTRO");
+            console.log(text);
+            text[0].geo[0] = res[0].latitude;
+            text[0].geo[1] = res[0].longitude;
+            console.log(text);
+            return (text);
+        })
+        .catch(function (err) {
+            console.log(err);
+        });
+
+}
 
 let getDishesAutocomplete = (req, res) => {
     console.log("autocomplete");
